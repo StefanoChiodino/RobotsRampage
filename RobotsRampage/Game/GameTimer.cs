@@ -1,41 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SpaceRampage.Game
+﻿namespace SpaceRampage.Game
 {
-    using System.Activities.Statements;
+    #region Using
+    using System;
     using System.Diagnostics;
     using System.Threading;
 
+    #endregion
+
     public class GameTimer
     {
-        private Action FrameCallback;
-        private Action StartCallback;
-        private Action EndCallback;
-
-        private int desiredFPS;
-        public int DesiredFPS
-        {
-            get
-            {
-                return desiredFPS;
-            }
-            set
-            {
-                desiredFPS = value;
-                this.MsToUpdate = (long)Math.Round(1000.0 / value);
-            }
-        }
-
+        #region Fields
+        private readonly Action EndCallback;
+        private readonly Action FrameCallback;
+        private readonly Action StartCallback;
         private double ActualFPS;
-        private enum GameTimerState { Created, Running, Stopped };
-
-        private long State;
-
         private long MsToUpdate;
+        private long State;
+        private int desiredFPS;
+        #endregion
 
+        #region Constructors and Destructors
         public GameTimer(Action frameCallback, int desiredFps, Action startCallback = null, Action endCallback = null)
         {
             if (frameCallback == null)
@@ -52,45 +36,76 @@ namespace SpaceRampage.Game
             this.EndCallback = endCallback ?? (() => { });
             this.DesiredFPS = desiredFps;
         }
+        #endregion
 
+        #region Enums
+        private enum GameTimerState
+        {
+            Created,
+            Running,
+            Stopped
+        };
+        #endregion
+
+        #region Public Properties
+        public int DesiredFPS
+        {
+            get
+            {
+                return this.desiredFPS;
+            }
+            set
+            {
+                this.desiredFPS = value;
+                this.MsToUpdate = (long)Math.Round(1000.0 / value);
+            }
+        }
+        #endregion
+
+        #region Public Methods and Operators
         public bool Start()
         {
-            if (Interlocked.CompareExchange(ref this.State, (long)GameTimerState.Running, (long)GameTimerState.Created) != (long)GameTimerState.Created)
+            if (Interlocked.CompareExchange(ref this.State, (long)GameTimerState.Running, (long)GameTimerState.Created)
+                != (long)GameTimerState.Created)
             {
                 return false;
             }
-            ThreadPool.QueueUserWorkItem(Run);
+            ThreadPool.QueueUserWorkItem(this.Run);
             return true;
         }
 
         public bool Stop()
         {
-            if (Interlocked.CompareExchange(ref this.State, (long)GameTimerState.Stopped, (long)GameTimerState.Running) != (long)GameTimerState.Running)
+            if (Interlocked.CompareExchange(ref this.State, (long)GameTimerState.Stopped, (long)GameTimerState.Running)
+                != (long)GameTimerState.Running)
             {
                 return false;
             }
             return true;
         }
+        #endregion
+
+        #region Methods
         private void Run(object state)
         {
             var stopWatch = new Stopwatch();
             long lastMsUpdate = 0;
 
-            StartCallback();
+            this.StartCallback();
 
             stopWatch.Start();
 
-            while (Interlocked.Read(ref State) == (int)GameTimerState.Running)
+            while (Interlocked.Read(ref this.State) == (int)GameTimerState.Running)
             {
                 long currentMs = stopWatch.ElapsedMilliseconds;
                 if (currentMs - lastMsUpdate >= this.MsToUpdate)
                 {
-                    ActualFPS = 1000.0 / (currentMs - lastMsUpdate);
-                    lastMsUpdate = currentMs;
 #if DEBUG
-                    Debug.WriteLine("Actual FPS: {0}", ActualFPS);
+                    this.ActualFPS = 1000.0 / (currentMs - lastMsUpdate);
+                    lastMsUpdate = currentMs;
+                    Debug.WriteLine("Actual FPS: {0}", this.ActualFPS);
 #endif
-                    FrameCallback();
+                    this.FrameCallback();
                 }
                 else
                 {
@@ -98,9 +113,9 @@ namespace SpaceRampage.Game
                 }
             }
 
-            EndCallback();
+            this.EndCallback();
             stopWatch.Stop();
         }
-
+        #endregion
     }
 }

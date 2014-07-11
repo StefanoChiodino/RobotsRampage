@@ -35,8 +35,8 @@ namespace RobotsRampage.Hubs
         public void Rampage(int x, int y)
         {
             Robot robot = RobotsRampageController.Robots.First(r => r.Client.ConnectionId == Context.ConnectionId);
-            robot.X = x;
-            robot.Y = y;
+            robot.Position.X = x;
+            robot.Position.Y = y;
         }
 
         public void Robot(int x, int y)

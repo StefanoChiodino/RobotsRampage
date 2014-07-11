@@ -3,33 +3,6 @@
 
 
 $(document).ready(function () {
-    // Trigger action when the contexmenu is about to be shown
-    //$(document).bind("contextmenu", function (event) {
-    //    // Avoid the real one
-    //    event.preventDefault();
-    //    // Show contextmenu
-    //    $(".menuWrapper").toggle(100).
-    //    // In the right position (the mouse)
-    //    css({
-    //        top: event.pageY + "px",
-    //        left: event.pageX + "px"
-    //    });
-    //});
-
-    //// If the document is clicked somewhere
-    //$(document).bind("mousedown", function (e) {
-    //    $(".menuWrapper").hide(100);
-    //});
-
-    //$(".menu li").click(function (event) {
-    //    // This is the triggered action name
-    //    switch ($(this).attr("data-action")) {
-    //        case "rampage":
-    //            robotsRampageHub.server.rampage(event.pageX, event.pageY);
-    //            break;
-    //    }
-    //});
-
     $.contextMenu({
         // define which elements trigger this menu
         selector: "#map",
@@ -57,8 +30,8 @@ $(document).ready(function () {
             var robot = robots[i];
             var robotDiv = $('<div></div>')
                 .addClass("robot")
-                .css("top", robot.Y)
-                .css("left", robot.X)
+                .css("top", robot.Position.Y)
+                .css("left", robot.Position.X)
                 .css("background-color", robot.Client.WebColor);
             $("#map").append(robotDiv);
         }
