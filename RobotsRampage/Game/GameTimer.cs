@@ -15,11 +15,25 @@ namespace SpaceRampage.Game
         private Action StartCallback;
         private Action EndCallback;
 
-        private int DesiredFPS;
-        private int ActualFPS = 0;
+        private int desiredFPS;
+        public int DesiredFPS {
+            get
+            {
+                return desiredFPS;
+            }
+            set
+            {
+                desiredFPS = value;
+                this.MsToUpdate = (long)Math.Round(1000.0 / value);
+            } 
+        }
+
+        private double ActualFPS;
         private enum GameTimerState { Created, Running, Stopped };
 
         private long State;
+
+        private long MsToUpdate;
 
         public GameTimer(Action frameCallback, int desiredFps, Action startCallback = null, Action endCallback = null)
         {
@@ -60,25 +74,28 @@ namespace SpaceRampage.Game
         {
             var stopWatch = new Stopwatch();
             long lastMsUpdate = 0;
-            long msToUpdate = (long)Math.Round(1000m / this.DesiredFPS);
-            long msToNextUpdate = msToUpdate;
+
+            StartCallback();
+
             stopWatch.Start();
 
             while (Interlocked.Read(ref State) == (int)GameTimerState.Running)
             {
                 long currentMs = stopWatch.ElapsedMilliseconds;
-                long elapsed = currentMs - lastMsUpdate;
-                msToNextUpdate -= elapsed;
-                if (msToNextUpdate <= 0)
+                if (currentMs - lastMsUpdate >= this.MsToUpdate)
                 {
-                    msToNextUpdate = msToUpdate - msToNextUpdate;
+                    ActualFPS = 1000.0 / (currentMs - lastMsUpdate);
+                    lastMsUpdate = currentMs;
+                    Debug.WriteLine(string.Format("Actual FPS: {0}", ActualFPS));
                     FrameCallback();
                 }
-
-                lastMsUpdate = currentMs;
-                Thread.Yield();
-
+                else
+                {
+                    Thread.Yield();
+                }
             }
+
+            EndCallback();
             stopWatch.Stop();
         }
 
