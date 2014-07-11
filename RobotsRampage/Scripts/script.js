@@ -1,48 +1,66 @@
 ﻿var robotsRampageHub;
 
+
+
 $(document).ready(function () {
+    // Trigger action when the contexmenu is about to be shown
+    //$(document).bind("contextmenu", function (event) {
+    //    // Avoid the real one
+    //    event.preventDefault();
+    //    // Show contextmenu
+    //    $(".menuWrapper").toggle(100).
+    //    // In the right position (the mouse)
+    //    css({
+    //        top: event.pageY + "px",
+    //        left: event.pageX + "px"
+    //    });
+    //});
 
-    //var worldHub = $.connection.worldHub;
-    //worldHub.client.setWorld = function (world) {
-    //    for (var x = 0; x < world.Cubes.length; x++) {
-    //        var rowDiv = $('<div></div>')
-    //            //.addClass("row")
-    //            .css("height", 100 / world.Cubes.length + "%");
-    //        $("#world").append(rowDiv);
-    //        for (var y = 0; y < world.Cubes[x].length; y++) {
-    //            var div = $('<div></div>')
-    //                .addClass("cube")
-    //                .attr("id", "cube-" + x + "-" + y)
-    //                .css("background-color", world.Cubes[x][y][0].Color);
+    //// If the document is clicked somewhere
+    //$(document).bind("mousedown", function (e) {
+    //    $(".menuWrapper").hide(100);
+    //});
 
-    //            rowDiv.append(div);
-    //        }
+    //$(".menu li").click(function (event) {
+    //    // This is the triggered action name
+    //    switch ($(this).attr("data-action")) {
+    //        case "rampage":
+    //            robotsRampageHub.server.rampage(event.pageX, event.pageY);
+    //            break;
     //    }
+    //});
 
-    //    var stylesheet = document.styleSheets[0];
-    //    var selector = ".cube";
-    //    var rule = "{width: " + 100 / world.Cubes.length + "%;" +
-    //        "height: 100%}";
-    //        //"height: " + 100 / world.Cubes[0].length + "%}";
-
-    //    if (stylesheet.insertRule) {
-    //        stylesheet.insertRule(selector + rule, stylesheet.cssRules.length);
-    //    } else if (stylesheet.addRule) {
-    //        stylesheet.addRule(selector, rule, -1);
-    //    }
-    //};
+    $.contextMenu({
+        // define which elements trigger this menu
+        selector: "#map",
+        // define the elements of the menu
+        items: {
+            rampage: {
+                name: "RAMPAGEEE",
+                callback: function(key, opt) {
+                    robotsRampageHub.server.rampage(event.pageX, event.pageY);
+                }
+            },
+            robot: {
+                name: "MORE ROBOTTTSSS",
+                callback: function(key, opt) {
+                    robotsRampageHub.server.robot(event.pageX, event.pageY);
+                }
+            }
+        }
+    });
 
     robotsRampageHub = $.connection.robotsRampageHub;
-    robotsRampageHub.client.setRobots = function(robots) {
+    robotsRampageHub.client.setRobots = function (robots) {
         $("#map").html("");
         for (var i = 0; i < robots.length; i++) {
             var robot = robots[i];
-            var robot = $('<div></div>')
+            var robotDiv = $('<div></div>')
                 .addClass("robot")
                 .css("top", robot.Y)
                 .css("left", robot.X)
                 .css("background-color", robot.Client.WebColor);
-            $("#map").append(robot);
+            $("#map").append(robotDiv);
         }
     };
     $.connection.hub.logging = true;

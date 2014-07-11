@@ -16,7 +16,8 @@ namespace SpaceRampage.Game
         private Action EndCallback;
 
         private int desiredFPS;
-        public int DesiredFPS {
+        public int DesiredFPS
+        {
             get
             {
                 return desiredFPS;
@@ -25,7 +26,7 @@ namespace SpaceRampage.Game
             {
                 desiredFPS = value;
                 this.MsToUpdate = (long)Math.Round(1000.0 / value);
-            } 
+            }
         }
 
         private double ActualFPS;
@@ -86,7 +87,9 @@ namespace SpaceRampage.Game
                 {
                     ActualFPS = 1000.0 / (currentMs - lastMsUpdate);
                     lastMsUpdate = currentMs;
-                    Debug.WriteLine(string.Format("Actual FPS: {0}", ActualFPS));
+#if DEBUG
+                    Debug.WriteLine("Actual FPS: {0}", ActualFPS);
+#endif
                     FrameCallback();
                 }
                 else

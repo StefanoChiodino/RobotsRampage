@@ -32,5 +32,17 @@ namespace RobotsRampage.Hubs
             Clients.Caller.setWorld(RobotsRampageController.Map);
         }
 
+        public void Rampage(int x, int y)
+        {
+            Robot robot = RobotsRampageController.Robots.First(r => r.Client.ConnectionId == Context.ConnectionId);
+            robot.X = x;
+            robot.Y = y;
+        }
+
+        public void Robot(int x, int y)
+        {
+            var client = RobotsRampageController.Clients.First(c => c.ConnectionId == Context.ConnectionId);
+            RobotsRampageController.Robots.Add(new Robot(client));
+        }
     }
 }

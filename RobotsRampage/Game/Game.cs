@@ -17,7 +17,7 @@
         public Game()
         {
             GameTimer = new GameTimer(() => this.RobotsRampageHub.Clients.All.setRobots(RobotsRampageController.Robots),
-                1000);
+                10);
             GameTimer.Start();
         }
     }

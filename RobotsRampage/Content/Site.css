@@ -25,3 +25,34 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.menuWrapper {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+}
+#crosshair {
+    width: 32px;
+    height: 32px;
+    top: -16px;
+    left: -16px;
+    position: absolute;
+}
+
+.menu {
+    background-color: #EEE;
+    border: 1px solid #888;
+    overflow: hidden;
+    width: 120px;
+    white-space: nowrap;
+    font-family: sans-serif;
+}
+
+    .menu li {
+        padding: 5px;
+    }
+
+        .menu li:hover {
+            background-color: #DDD;
+            cursor: pointer;
+        }

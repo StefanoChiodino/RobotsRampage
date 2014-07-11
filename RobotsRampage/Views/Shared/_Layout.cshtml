@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,6 +12,8 @@
     <script src="/signalr/hubs" type="text/javascript"></script>
     @Scripts.Render("~/Scripts/script.js")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/Scripts/jquery.contextMenu.js")
+    @Styles.Render("~/Content/jquery.contextMenu.css")
 
 </head>
 <body>

@@ -13,9 +13,9 @@ namespace RobotsRampage.Models
         [DataMember]
         public Client Client { get; private set; }
         [DataMember]
-        public double X { get; private set; }
+        public double X { get; set; }
         [DataMember]
-        public double Y { get; private set; }
+        public double Y { get; set; }
         public Robot(Client client)
         {
             this.Client = client;

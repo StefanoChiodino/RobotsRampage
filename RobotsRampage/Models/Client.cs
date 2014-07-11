@@ -11,7 +11,7 @@ namespace SpaceRampage.Models
     public class Client
     {
         [DataMember]
-        public string ClientID { get; private set; }
+        public string ConnectionId { get; private set; }
         public Color Color { get; private set; }
         [DataMember]
         public string WebColor
@@ -22,9 +22,9 @@ namespace SpaceRampage.Models
             }
         }
 
-        public Client(string clientID)
+        public Client(string connectionId)
         {
-            this.ClientID = clientID;
+            this.ConnectionId = connectionId;
             this.Color = GetRandomColor();
         }
 
