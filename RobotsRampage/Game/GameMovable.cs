@@ -1,7 +1,7 @@
-﻿namespace SpaceRampage.Game
+﻿namespace RobotsRampage.Game
 {
     using System.Runtime.Serialization;
-    using SpaceRampage.Game.Utility;
+    using RobotsRampage.Game.Utility;
 
     [DataContract]
     public abstract class GameMovable

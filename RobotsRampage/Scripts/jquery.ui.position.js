@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Position v1.10.0
+ * jQuery UI TargetPosition v1.10.0
  * http://jqueryui.com
  *
  * Copyright 2013 jQuery Foundation and other contributors

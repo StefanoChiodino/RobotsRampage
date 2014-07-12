@@ -1,7 +1,7 @@
-﻿namespace SpaceRampage.Game.GameAction
+﻿namespace RobotsRampage.Game
 {
     #region Using
-    using SpaceRampage.Models;
+    using RobotsRampage.Models;
 
     #endregion
 
@@ -21,5 +21,7 @@
         #endregion
 
         public abstract void Execute(int elapsed);
+
+        public abstract bool IsCompleted();
     }
 }

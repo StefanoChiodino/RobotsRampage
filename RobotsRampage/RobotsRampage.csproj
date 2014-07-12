@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpaceRampage</RootNamespace>
-    <AssemblyName>SpaceRampage</AssemblyName>
+    <RootNamespace>RobotsRampage</RootNamespace>
+    <AssemblyName>RobotsRampage</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -167,11 +167,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Game\GameAction\MoveAction.cs" />
+    <Compile Include="Game\Controllers\RobotMovementController.cs" />
+    <Compile Include="Game\GameActions\MoveAction.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RobotsRampageController.cs" />
-    <Compile Include="Game\GameAction\GameAction.cs" />
+    <Compile Include="Game\GameAction.cs" />
+    <Compile Include="Game\MovementController.cs" />
     <Compile Include="Game\GameTimer.cs" />
     <Compile Include="Game\Utility\Vector2.cs" />
     <Compile Include="Global.asax.cs">

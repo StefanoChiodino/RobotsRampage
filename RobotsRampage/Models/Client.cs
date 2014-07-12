@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SpaceRampage.Models
+﻿namespace RobotsRampage.Models
 {
+    using System;
     using System.Drawing;
     using System.Runtime.Serialization;
 
@@ -18,14 +14,14 @@ namespace SpaceRampage.Models
         {
             get
             {
-                return "#" + Color.R.ToString("X2") + Color.G.ToString("X2") + Color.B.ToString("X2");
+                return "#" + this.Color.R.ToString("X2") + this.Color.G.ToString("X2") + this.Color.B.ToString("X2");
             }
         }
 
         public Client(string connectionId)
         {
             this.ConnectionId = connectionId;
-            this.Color = GetRandomColor();
+            this.Color = this.GetRandomColor();
         }
 
         private Color GetRandomColor()

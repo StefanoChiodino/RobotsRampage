@@ -1,4 +1,4 @@
-﻿namespace SpaceRampage.Game
+﻿namespace RobotsRampage.Game
 {
     #region Using
     using System;

@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotsRampage", "RobotsRampage\RobotsRampage.csproj", "{3EEE88B8-E01B-4364-BAA4-D3F99F70980E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{8BE13ABB-192C-4170-A154-12EB5577CBC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3EEE88B8-E01B-4364-BAA4-D3F99F70980E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EEE88B8-E01B-4364-BAA4-D3F99F70980E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EEE88B8-E01B-4364-BAA4-D3F99F70980E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE13ABB-192C-4170-A154-12EB5577CBC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE13ABB-192C-4170-A154-12EB5577CBC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE13ABB-192C-4170-A154-12EB5577CBC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE13ABB-192C-4170-A154-12EB5577CBC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

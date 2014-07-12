@@ -1,12 +1,8 @@
-﻿namespace SpaceRampage.Controllers
+﻿namespace RobotsRampage.Game
 {
-    using System.Threading;
-
     using Microsoft.AspNet.SignalR;
-
+    using RobotsRampage.Controllers;
     using RobotsRampage.Hubs;
-
-    using SpaceRampage.Game;
 
     internal class Game
     {
@@ -16,9 +12,9 @@
 
         public Game()
         {
-            GameTimer = new GameTimer(() => this.RobotsRampageHub.Clients.All.setRobots(RobotsRampageController.Robots),
+            this.GameTimer = new GameTimer(() => this.RobotsRampageHub.Clients.All.setRobots(RobotsRampageController.Robots),
                 10);
-            GameTimer.Start();
+            this.GameTimer.Start();
         }
     }
 }

@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.SignalR;
-using RobotsRampage.Models;
-
-namespace RobotsRampage.Hubs
+﻿namespace RobotsRampage.Hubs
 {
-    using Newtonsoft.Json;
-
-    using SpaceRampage.Controllers;
-    using SpaceRampage.Models;
+    using System.Linq;
+    using Microsoft.AspNet.SignalR;
+    using RobotsRampage.Controllers;
+    using RobotsRampage.Models;
 
     public class RobotsRampageHub : Hub
     {
         public void AddClient()
         {
-            var client = new Client(Context.ConnectionId);
+            var client = new Client(this.Context.ConnectionId);
             RobotsRampageController.Clients.Add(client);
 
             var robot = new Robot(client);
@@ -25,23 +18,24 @@ namespace RobotsRampage.Hubs
 
         private void SendRobots()
         {
-            Clients.All.setRobots(RobotsRampageController.Robots);
+            this.Clients.All.setRobots(RobotsRampageController.Robots);
         }
+
         public void GetMap()
         {
-            Clients.Caller.setWorld(RobotsRampageController.Map);
+            this.Clients.Caller.setWorld(RobotsRampageController.Map);
         }
 
         public void Rampage(int x, int y)
         {
-            Robot robot = RobotsRampageController.Robots.First(r => r.Client.ConnectionId == Context.ConnectionId);
+            Robot robot = RobotsRampageController.Robots.First(r => r.Client.ConnectionId == this.Context.ConnectionId);
             robot.Position.X = x;
             robot.Position.Y = y;
         }
 
         public void Robot(int x, int y)
         {
-            var client = RobotsRampageController.Clients.First(c => c.ConnectionId == Context.ConnectionId);
+            var client = RobotsRampageController.Clients.First(c => c.ConnectionId == this.Context.ConnectionId);
             RobotsRampageController.Robots.Add(new Robot(client));
         }
     }
