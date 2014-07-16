@@ -3,6 +3,9 @@
     using System.Linq;
     using Microsoft.AspNet.SignalR;
     using RobotsRampage.Controllers;
+    using RobotsRampage.Game;
+    using RobotsRampage.Game.GameActions;
+    using RobotsRampage.Game.Utility;
     using RobotsRampage.Models;
 
     public class RobotsRampageHub : Hub
@@ -10,33 +13,32 @@
         public void AddClient()
         {
             var client = new Client(this.Context.ConnectionId);
-            RobotsRampageController.Clients.Add(client);
+            Game.Clients.Add(client);
 
-            var robot = new Robot(client);
-            RobotsRampageController.Robots.Add(robot);
+            var robot = new Robot();
+            client.Robots.Add(robot);
         }
 
         private void SendRobots()
         {
-            this.Clients.All.setRobots(RobotsRampageController.Robots);
+            this.Clients.All.setRobots(Game.Clients);
         }
 
         public void GetMap()
         {
-            this.Clients.Caller.setWorld(RobotsRampageController.Map);
+            this.Clients.Caller.setWorld(Game.Map);
         }
 
         public void Rampage(int x, int y)
         {
-            Robot robot = RobotsRampageController.Robots.First(r => r.Client.ConnectionId == this.Context.ConnectionId);
-            robot.Position.X = x;
-            robot.Position.Y = y;
+            Client client = Game.Clients.First(c => c.ConnectionId == this.Context.ConnectionId);
+            client.GameActions.Add(new MoveAction(0, client, new Vector2(x, y), client.Robots));
         }
 
         public void Robot(int x, int y)
         {
-            var client = RobotsRampageController.Clients.First(c => c.ConnectionId == this.Context.ConnectionId);
-            RobotsRampageController.Robots.Add(new Robot(client));
+            var client = Game.Clients.First(c => c.ConnectionId == this.Context.ConnectionId);
+            client.Robots.Add(new Robot());
         }
     }
 }

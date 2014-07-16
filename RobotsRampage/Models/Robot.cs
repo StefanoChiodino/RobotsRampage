@@ -1,17 +1,28 @@
 ﻿namespace RobotsRampage.Models
 {
     using System.Runtime.Serialization;
-    using RobotsRampage.Game;
+    using RobotsRampage.Game.Controllers;
+    using RobotsRampage.Game.Utility;
 
     [DataContract]
-    public class Robot : GameMovable
+    public class Robot
     {
+        public RobotMovementController RobotMovementController = new RobotMovementController(new Vector2());
         [DataMember]
-        public Client Client { get; private set; }
-
-        public Robot(Client client)
+        public double X
         {
-            this.Client = client;
+            get
+            {
+                return this.RobotMovementController.Position.X;
+            }
+        }
+        [DataMember]
+        public double Y
+        {
+            get
+            {
+                return this.RobotMovementController.Position.Y;
+            }
         }
     }
 }

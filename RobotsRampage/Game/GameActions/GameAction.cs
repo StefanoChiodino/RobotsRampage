@@ -20,7 +20,7 @@
         }
         #endregion
 
-        public abstract void Execute(int elapsed);
+        public abstract void Execute(long elapsed);
 
         public abstract bool IsCompleted();
     }

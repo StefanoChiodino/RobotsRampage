@@ -1,11 +1,17 @@
 ﻿namespace RobotsRampage.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Runtime.Serialization;
+    using RobotsRampage.Game;
 
+    [DataContract]
     public class Client
     {
+        public List<GameAction> GameActions = new List<GameAction>();
+        [DataMember]
+        public List<Robot> Robots = new List<Robot>();
         [DataMember]
         public string ConnectionId { get; private set; }
         public Color Color { get; private set; }

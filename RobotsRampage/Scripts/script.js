@@ -24,16 +24,19 @@ $(document).ready(function () {
     });
 
     robotsRampageHub = $.connection.robotsRampageHub;
-    robotsRampageHub.client.setRobots = function (robots) {
+    robotsRampageHub.client.setRobots = function (clients) {
         $("#map").html("");
-        for (var i = 0; i < robots.length; i++) {
-            var robot = robots[i];
-            var robotDiv = $('<div></div>')
-                .addClass("robot")
-                .css("top", robot.Position.Y)
-                .css("left", robot.Position.X)
-                .css("background-color", robot.Client.WebColor);
-            $("#map").append(robotDiv);
+        for (var i = 0; i < clients.length; i++) {
+            var client = clients[i];
+            for (var j = 0; j < client.Robots.length; j++) {
+                var robot = client.Robots[j];
+                var robotDiv = $('<div></div>')
+                    .addClass("robot")
+                    .css("top", robot.Y)
+                    .css("left", robot.X)
+                    .css("background-color", client.WebColor);
+                $("#map").append(robotDiv);
+            }
         }
     };
     $.connection.hub.logging = true;

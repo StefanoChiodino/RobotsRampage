@@ -1,33 +1,37 @@
 ﻿namespace RobotsRampage.Game.GameActions
 {
-    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using RobotsRampage.Game.Utility;
     using RobotsRampage.Models;
 
     public class MoveAction : GameAction
     {
-        public MovementController MovementController { get; set; }
+        public List<Robot> Robots { get; set; }
         public Vector2 TargetPosition { get; set; }
 
-        public MoveAction(int priority, Client client, MovementController movementController, Vector2 targetPosition)
+        public MoveAction(int priority, Client client, Vector2 targetPosition, List<Robot> robots)
             : base(priority, client)
         {
-            this.MovementController = movementController;
             this.TargetPosition = targetPosition;
+            this.Robots = robots;
         }
 
         /// <summary>
-        /// Execute the action
+        ///     Execute the action
         /// </summary>
         /// <param name="elapsed">The ms elapsed</param>
-        public override void Execute(int elapsed)
+        public override void Execute(long elapsed)
         {
-            MovementController.Move(TargetPosition);
+            foreach (var robot in Robots)
+            {
+                robot.RobotMovementController.Move(this.TargetPosition);
+            }
         }
 
         public override bool IsCompleted()
         {
-            return TargetPosition == MovementController.Position;
+            return this.Robots.All(r=> this.TargetPosition == r.RobotMovementController.Position);
         }
     }
 }

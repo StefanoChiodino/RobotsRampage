@@ -172,9 +172,9 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RobotsRampageController.cs" />
-    <Compile Include="Game\GameAction.cs" />
-    <Compile Include="Game\MovementController.cs" />
-    <Compile Include="Game\GameTimer.cs" />
+    <Compile Include="Game\GameActions\GameAction.cs" />
+    <Compile Include="Game\Controllers\MovementController.cs" />
+    <Compile Include="Game\Utility\GameTimer.cs" />
     <Compile Include="Game\Utility\Vector2.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,7 +182,6 @@
     <Compile Include="Hubs\RobotsRampageHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Game\GameMovable.cs" />
     <Compile Include="Models\Robot.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Map.cs" />
